@@ -1,8 +1,11 @@
 # Tuples
 
+A tuple is a collection of objects which ordered and immutable. Tuples are sequences, just like lists. The differences between tuples and lists are, the tuples cannot be changed unlike lists and tuples use parentheses, whereas lists use square brackets
+
 
 # NamedTuples
-	Namedtuple is a subclass of tuples and creates tuple-like immutable objects:
+Namedtuple is a subclass of tuples and creates tuple-like immutable objects:
+
 	```
 	from collections import namedtuple
 	Point2D = namedtuple('Point2D', 'x, y')
@@ -100,6 +103,7 @@ Local Logs
 ![Local Logs](https://github.com/Gaju27/session10/blob/master/pycharm_logs.JPG)
 
 Github Action-Logs
+
 ![Github Action-Logs](https://github.com/Gaju27/session10/blob/master/action_logs.JPG)
 
 ## License
