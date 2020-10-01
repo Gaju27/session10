@@ -20,7 +20,6 @@ year = []
 month = []
 day = []
 
-
 today = datetime.date.today()
 print(today)
 
@@ -51,7 +50,7 @@ def fake_profile_gen(n):
           get the last value which will be the highest blood group
        6. Return the oldest person age min(birth_list)
     '''
-    if n>0:
+    if n > 0:
         profile_details = namedtuple('profile_details', 'blood_group current_location birthdate')
         current_location = namedtuple('current_location', 'longitude  latitude')
         for i in range(n):
@@ -71,13 +70,16 @@ def fake_profile_gen(n):
         sorted((Counter(blist)).items(), key=itemgetter(1))), dlist, min(birth_list), avg_birth_list
 
 
-f_list, lo_list, la_list, b_list, d_list, birt_list, avg_birt_list = fake_profile_gen(1)
+f_list, lo_list, la_list, b_list, d_list, birt_list, avg_birt_list = fake_profile_gen(10000)
+
+print(type(len(f_list)))
 
 
 @timed
 def get_larged_blood_group(b_list):
     '''get the blood group in dictionary with total blood_group count and return largest one'''
     return b_list, b_list[-1][0]
+
 
 @timed
 def faker_average_age(avg_birt_list):
@@ -89,11 +91,10 @@ def faker_average_age(avg_birt_list):
         day.append(avg_age.tm_mday)
     return f'{round(mean(year))}-{round(mean(month))}-{round(mean(day))}'
 
-
-print('Largest blood group: ', get_larged_blood_group(b_list))
-
-print('Mean on current location: ', mean(long_list), mean(lat_list))
-
-print('Oldest person age: ', min(birt_list))
-
-print('Average_age: ',faker_average_age(avg_birt_list))
+# print('Largest blood group: ', get_larged_blood_group(b_list))
+#
+# print('Mean on current location: ', mean(long_list), mean(lat_list))
+#
+# print('Oldest person age: ', min(birt_list))
+#
+# print('Average_age: ',faker_average_age(avg_birt_list))

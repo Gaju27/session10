@@ -44,15 +44,14 @@ def test_readme_file_for_formatting():
     assert content.count("#") >= 5
 
 
-#
-# def test_indentations():
-#     ''' Returns pass if used four spaces for each level of syntactically \
-#     significant indenting.'''
-#     lines = inspect.getsource(session10)
-#     spaces = re.findall('\n +.', lines)
-#     for space in spaces:
-#         assert len(space) % 4 == 2, "Your script contains misplaced indentations"
-#         assert len(re.sub(r'[^ ]', '', space)) % 4 == 0, "Your code indentation does not follow PEP8 guidelines"
+def test_indentations():
+    ''' Returns pass if used four spaces for each level of syntactically \
+    significant indenting.'''
+    lines = inspect.getsource(session10)
+    spaces = re.findall('\n +.', lines)
+    for space in spaces:
+        assert len(space) % 4 == 2, "Your script contains misplaced indentations"
+        assert len(re.sub(r'[^ ]', '', space)) % 4 == 0, "Your code indentation does not follow PEP8 guidelines"
 
 
 def test_function_name_had_cap_letter():
@@ -67,14 +66,29 @@ def test_fake_profile_gen_for_neg_input():
 
 
 def test_fake_profile_gen_works():
-    f_list, lo_list, la_list, b_list, d_list, birt_list, avg_birt_list = session10.fake_profile_gen(1)
-    assert len(f_list) != 0, 'Length of Faker profiles must have some values i.e length of list not equals to zero '
-    assert len(lo_list) != 0, 'Length of longitude must have some values i.e length of list not equals to zero'
-    assert len(la_list) != 0, 'Length of latitude must have some values i.e length of list not equals to zero'
-    assert len(b_list) != 0, 'Length of Blood group must have some values i.e length of list not equals to zero'
-    assert len(d_list) != 0, 'Length of Current Location must have some values i.e length of list not equals to zero'
-    assert len(birt_list) != 0, 'Length of birthdate must have some values i.e length of list not equals to zero'
-    assert len(avg_birt_list) != 0, 'Length of average birth must have some values i.e length of list not equals to zero'
+    assert len(
+        session10.f_list) != 0, 'Length of Faker profiles must have some values i.e length of list not equals to zero '
+
+
+def test_1000_fake_profile_count():
+    assert len(session10.f_list) == 10000
+
+
+def test_lang_lat_value():
+    assert bool(session10.lo_list) == True, 'Length of longitude must have some values '
+    assert bool(session10.la_list) == True, 'Length of latitude must have some values '
+
+
+def test_blood_group_value():
+    assert bool(session10.blist) == True, 'Length of blood group must have some values '
+
+
+def test_current_location_value():
+    assert bool(session10.d_list) == True, 'Length of current location must have some values '
+
+
+def test_birthdate_value():
+    assert bool(session10.birt_list) == True, 'Length of birthdate must have some values '
 
 
 def test_for_largest_blood_group():
@@ -84,6 +98,11 @@ def test_for_largest_blood_group():
 
 
 def test_for_average_age():
-    *_, avg_birt_list = session10.fake_profile_gen(10000)
-    _, blood_list = session10.get_larged_blood_group(b_list)
-    assert bool(avg_birt_list) == True, 'Checking for the largest blood group from profiles'
+    assert bool(session10.avg_birt_list) == True, 'Checking for the largest blood group from profiles'
+
+
+def test_timed_function(capsys):
+    result = session10.get_larged_blood_group(session10.blist)
+    value = capsys.readouterr()
+    assert "Avg Run time:" in value.out
+    assert bool(result) == True
